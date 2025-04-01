@@ -4,8 +4,6 @@
 //
 //  Created by Jake Bass on 3/31/25.
 //
-
-
 // src/screens/DashboardScreen.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
