@@ -1,5 +1,4 @@
 {
-  "extends": "./node_modules/expo/tsconfig.base",
   "compilerOptions": {
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true
@@ -9,5 +8,6 @@
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }
