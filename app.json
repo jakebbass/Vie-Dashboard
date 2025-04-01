@@ -17,13 +17,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vieinc.viedashboard",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "extra": {
       "eas": {
-        "projectId": "38f65575-c2e1-4293-b67b-2bf4e496d131"
+        "projectId": "e266389b-7289-41eb-8b3e-baf2db04352c"
       }
     },
-    "owner": "vie-inc"
+    "owner": "vie-inc",
+    "android": {
+      "package": "com.vieinc.viedashboard"
+    }
   }
 }
