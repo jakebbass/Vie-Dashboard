@@ -23,11 +23,6 @@
     "android": {
       "package": "com.vieinc.viedashboard",
       "versionCode": 1
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2869dead-0a13-4d3d-9afe-aa83dc7a1988"
-      }
     }
   }
 }
