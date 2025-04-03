@@ -1,63 +1,63 @@
-{{
-    "name": "vie-dashboard",
+{
+  "name": "Vie-Dashboard",
+  "version": "1.0.0",
+  "main": "App.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "eas-build-pre-install": "echo \"Running pre-install steps...\"",
+    "eas-build-post-install": "echo \"Running post-install steps...\"",
+    "eas-build-on-success": "echo \"Build successful\"",
+    "eas-build-on-error": "echo \"Build failed\"",
+    "eas-build-on-complete": "echo \"Build complete\""
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "expo": "^52.0.42",
+    "expo-dev-client": "~5.0.16",
+    "expo-status-bar": "~2.0.1",
+    "metro": "^0.81.0",
+    "metro-config": "^0.81.0",
+    "metro-resolver": "^0.81.0",
+    "react": "18.3.1",
+    "react-native": "0.76.8"
+  },
+  "devDependencies": {
+    "@types/react": "~18.3.12",
+    "typescript": "^5.3.3"
+  },
+  "private": true,
+  "expo": {
+    "name": "Vie-Dashboard",
+    "slug": "vie-dashboard",
     "version": "1.0.0",
-    "main": "App.js",
-    "scripts": {
-      "start": "expo start",
-      "android": "expo start --android",
-      "ios": "expo start --ios",
-      "web": "expo start --web",
-      "eas-build-pre-install": "echo \"Running pre-install steps...\"",
-      "eas-build-post-install": "echo \"Running post-install steps...\"",
-      "eas-build-on-success": "echo \"Build successful\"",
-      "eas-build-on-error": "echo \"Build failed\"",
-      "eas-build-on-complete": "echo \"Build complete\""
+    "orientation": "portrait",
+    "icon": "./assets/Dark.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
-    "dependencies": {
-      "expo": "~48.0.18",
-      "expo-status-bar": "~2.0.1",
-      "react": "18.3.1",
-      "react-native": "0.76.8",
-      "@react-native-async-storage/async-storage": "1.23.1",
-      "expo-dev-client": "~5.0.16",
-      "metro": "^0.81.0",
-      "metro-resolver": "^0.81.0",
-      "metro-config": "^0.81.0"
+    "updates": {
+      "fallbackToCacheTimeout": 0
     },
-    "devDependencies": {
-      "typescript": "^5.3.3",
-      "@types/react": "~18.3.12"
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.vieinc.viedashboard",
+      "buildNumber": "1.0.0"
     },
-    "private": true,
-    "expo": {
-      "name": "vie-dashboard",
-      "slug": "vie-dashboard",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/Dark.png",
-      "splash": {
-        "image": "./assets/splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
-      },
-      "updates": {
-        "fallbackToCacheTimeout": 0
-      },
-      "assetBundlePatterns": [
-        "**/*"
-      ],
-      "ios": {
-        "bundleIdentifier": "com.vieinc.viedashboard",
-        "buildNumber": "1.0.0"
-      },
-      "android": {
-        "package": "com.vieinc.viedashboard",
-        "versionCode": 1
-      },
-      "doctor": {
-        "reactNativeDirectoryCheck": {
-          "listUnknownPackages": false
-        }
+    "android": {
+      "package": "com.vieinc.viedashboard",
+      "versionCode": 1
+    },
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false
       }
     }
   }
+}
