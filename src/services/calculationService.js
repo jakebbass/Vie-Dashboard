@@ -131,3 +131,118 @@ export function fetchDashboardData(monthlyDeposit) {
     assetValueTab
   };
 }
+// --- New Calculation Functions ---
+// Calculate PMT is already defined above as PMT(rate, nper, pv)
+// If needed, you can alias it as pmt for consistency:
+const pmt = PMT;
+
+/**
+ * Calculates values for the Lift-Off Loan Schedule.
+ * @param {number} userMonthlyDeposit - The monthly deposit from user input.
+ * @param {number} inputG3 - Input value (for example, from cell G3).
+ * @returns {object} Computed values for a loan schedule row.
+ */
+export function calculateLiftOffLoan(userMonthlyDeposit, inputG3) {
+  // StartingBalance = if(G3 > 0, G3, 0)
+  const startingBalance = inputG3 > 0 ? inputG3 : 0;
+  // You Paid = if(StartingBalance > 0.0001, PMT(15%, 20, -userMonthlyDeposit*24), 0)
+  const youPaid = startingBalance > 0.0001 ? pmt(0.15, 20, -userMonthlyDeposit * 24) : 0;
+  // Interest = StartingBalance * 15%
+  const interest = startingBalance * 0.15;
+  // Principal = You Paid - Interest
+  const principal = youPaid - interest;
+  // EndingBalance = StartingBalance - Principal (not negative)
+  let endingBalance = startingBalance - principal;
+  if (endingBalance < 0) endingBalance = 0;
+  // Finance Charge (constant)
+  const financeCharge = 3000.0;
+  
+  return {
+    startingBalance: parseFloat(startingBalance.toFixed(2)),
+    youPaid: parseFloat(youPaid.toFixed(2)),
+    interest: parseFloat(interest.toFixed(2)),
+    principal: parseFloat(principal.toFixed(2)),
+    endingBalance: parseFloat(endingBalance.toFixed(2)),
+    financeCharge: financeCharge
+  };
+}
+
+/**
+ * Calculates values for the Accumulation table.
+ * @param {number} userMonthlyDeposit - The user's monthly deposit.
+ * @param {number} beginningCashValue - The beginning cash value (from previous row or initial value).
+ * @param {number} customerDeposits - Amount deposited by customer.
+ * @param {number} policyCredit - The policy credit rate (e.g., 0.12 for 12%).
+ * @returns {object} Computed values for an accumulation row.
+ */
+export function calculateAccumulation(userMonthlyDeposit, beginningCashValue, customerDeposits, policyCredit) {
+  // Vie Deposits = monthly deposit * 12
+  const vieDeposits = userMonthlyDeposit * 12;
+  // Amount Credited = Beginning Cash Value * Policy Credit
+  const amountCredited = beginningCashValue * policyCredit;
+  // Policy Cash Value = Beginning Cash Value + Vie Deposits + Customer Deposits + Amount Credited
+  const policyCashValue = beginningCashValue + vieDeposits + customerDeposits + amountCredited;
+  // Amount Deposited by Customer = Customer Deposits + Policy Cash Value (adjust if needed)
+  const amountDepositedByCustomer = customerDeposits + policyCashValue;
+  
+  return {
+    beginningCashValue: parseFloat(beginningCashValue.toFixed(2)),
+    vieDeposits: parseFloat(vieDeposits.toFixed(2)),
+    customerDeposits: parseFloat(customerDeposits.toFixed(2)),
+    policyCredit,
+    amountCredited: parseFloat(amountCredited.toFixed(2)),
+    policyCashValue: parseFloat(policyCashValue.toFixed(2)),
+    amountDepositedByCustomer: parseFloat(amountDepositedByCustomer.toFixed(2))
+  };
+}
+
+/**
+ * Calculates values for the Customer Spending table.
+ * @param {number} beginningBalance - The beginning balance (e.g., from cell F3).
+ * @param {number} userMonthlyDeposit - The monthly deposit from user input.
+ * @returns {object} Computed values for a customer spending row.
+ */
+export function calculateCustomerSpending(beginningBalance, userMonthlyDeposit) {
+  // Spent = monthly deposit * 12
+  const spent = userMonthlyDeposit * 12;
+  // Loan Rate is fixed at 4%
+  const loanRate = 0.04;
+  // Loan Interest = (Beginning Balance + Spent) * Loan Rate
+  const loanInterest = (beginningBalance + spent) * loanRate;
+  // End Loan Balance = Beginning Balance + Spent + Loan Interest
+  const endLoanBalance = beginningBalance + spent + loanInterest;
+  // Amount Spent by Customer = Spent + (assumed additional amount; adjust as needed)
+  const amountSpentByCustomer = spent + spent;
+  
+  return {
+    beginningBalance: parseFloat(beginningBalance.toFixed(2)),
+    spent: parseFloat(spent.toFixed(2)),
+    loanRate,
+    loanInterest: parseFloat(loanInterest.toFixed(2)),
+    endLoanBalance: parseFloat(endLoanBalance.toFixed(2)),
+    amountSpentByCustomer: parseFloat(amountSpentByCustomer.toFixed(2))
+  };
+}
+
+/**
+ * Calculates values for the Asset Value table.
+ * @param {number} policyCashValue - The Policy Cash Value from the Accumulation table.
+ * @param {number} endLoanBalance - The End Loan Balance from the Customer Spending table.
+ * @param {number} owedOnLiftOffLoan - The amount owed on the lift-off loan.
+ * @returns {object} Computed values for an asset value row.
+ */
+export function calculateAssetValue(policyCashValue, endLoanBalance, owedOnLiftOffLoan) {
+  // Asset Value = Policy Cash Value - End Loan Balance (for YR00, adjust if needed)
+  const assetValue = policyCashValue - endLoanBalance;
+  // Avail. for Managed Investing = Asset Value (or could be adjusted further)
+  const availForManagedInvesting = assetValue;
+  // Avail. for Spending = if(Asset Value - Owed on Lift-Off Loan > 0, Asset Value - Owed on Lift-Off Loan, 0)
+  const availForSpending = (assetValue - owedOnLiftOffLoan) > 0 ? assetValue - owedOnLiftOffLoan : 0;
+  
+  return {
+    assetValue: parseFloat(assetValue.toFixed(2)),
+    owedOnLiftOffLoan: parseFloat(owedOnLiftOffLoan.toFixed(2)),
+    availForManagedInvesting: parseFloat(availForManagedInvesting.toFixed(2)),
+    availForSpending: parseFloat(availForSpending.toFixed(2))
+  };
+}
