@@ -7,11 +7,6 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "eas-build-pre-install": "echo \"Running pre-install steps...\"",
-    "eas-build-post-install": "echo \"Running post-install steps...\"",
-    "eas-build-on-success": "echo \"Build successful\"",
-    "eas-build-on-error": "echo \"Build failed\"",
-    "eas-build-on-complete": "echo \"Build complete\""
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
