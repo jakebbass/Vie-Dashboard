@@ -11,9 +11,6 @@
       },
       "android": {
         "buildType": "apk"
-      },
-      "env": {
-        "PATH": "/Users/jakebass/.rbenv/shims:/usr/local/bin:$PATH"
       }
     },
     "ios-simulator": {
@@ -32,10 +29,7 @@
     },
     "production": {
       "ios": {
-        "releaseChannel": "production",
-        "env": {
-          "PATH": "/Users/jakebass/.rbenv/shims:/usr/local/bin:$PATH"
-        }
+        "releaseChannel": "production"
       },
       "android": {
         "buildType": "app-bundle",
