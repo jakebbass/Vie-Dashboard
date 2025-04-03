@@ -1,14 +1,15 @@
 
 // src/screens/DashboardScreen.js
+
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
-import { Colors } from '../theme';
+import { Colors } from '../theme';  // Ensure you have src/theme.js with the correct color definitions
 
 export default function DashboardScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Image
+        <Image 
           source={require('../../assets/vie-logo-white-green.png')}
           style={styles.logo}
           resizeMode="contain"
@@ -16,11 +17,11 @@ export default function DashboardScreen() {
         <Text style={styles.headerText}>Vie Dashboard</Text>
       </View>
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to Your Financial Dashboard</Text>
+        <Text style={styles.title}>Welcome to Your Capital Account</Text>
         <Text style={styles.subtitle}>
           Your dynamic charts and capital account projections appear below.
         </Text>
-        {/* Dynamic chart components will be inserted here */}
+        {/* Insert your dynamic chart components here */}
       </View>
     </ScrollView>
   );
