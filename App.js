@@ -7,10 +7,11 @@
 
 
 // App.js
+// App.js
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import DashboardScreen from './src/screens/DashboardScreen';
+import DashboardScreen from './src/screens/DashboardScreen'; // this path must match exactly
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
         <Stack.Screen 
           name="Dashboard" 
           component={DashboardScreen} 
-          options={{ headerShown: false }}
+          options={{ headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
